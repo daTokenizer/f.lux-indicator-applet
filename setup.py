@@ -5,11 +5,14 @@ from sys import maxsize
 from os import rename
 
 # Determines which is the appropriate executable for 32-bit
-if maxsize == 2147483647:
-    rename("xflux32", "xflux")
-# ... or 64-bit processors
-elif maxsize == 9223372036854775807:
-    rename("xflux64", "xflux")
+try:
+    if maxsize == 2147483647:
+        rename("xflux32", "xflux")
+    # ... or 64-bit processors
+    elif maxsize == 9223372036854775807:
+        rename("xflux64", "xflux")
+except: #OSError
+    pass
 
 setup(name = "f.lux indicator applet",
     version = "1.1.8",
